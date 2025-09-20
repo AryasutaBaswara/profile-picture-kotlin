@@ -6,6 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -35,19 +38,35 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.draw.clip
 
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.test.screens.NewPage
+
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             TestTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Column (
-                        modifier = Modifier.fillMaxSize().padding(innerPadding),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ){
-                        ProfileCard(name = "Aryasuta Baswara")
+                val navController = rememberNavController()
+
+                NavHost(
+                    navController = navController,
+                    startDestination = "profile"
+                ) {
+                    composable("profile") {
+                        ProfileCard(
+                            name = "Aryasuta Baswara",
+                            modifier = Modifier.fillMaxSize().padding(top = 80.dp),
+                            onNavigateToNewPage = {
+                                navController.navigate("newPage")
+                            }
+                        )
+                    }
+                    composable("newPage") {
+                        NewPage(navController)
                     }
                 }
             }
@@ -56,7 +75,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ProfileCard(name: String, modifier: Modifier = Modifier) {
+fun ProfileCard(name: String, modifier: Modifier = Modifier, onNavigateToNewPage: () -> Unit) {
     Card (
         modifier = modifier.padding(24.dp).fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
@@ -156,6 +175,13 @@ fun ProfileCard(name: String, modifier: Modifier = Modifier) {
                     color = Color.DarkGray,
                     modifier = Modifier.padding(12.dp) // padding dalam card kecil
                 )
+            }
+
+            Button(
+                modifier = Modifier.padding(top = 24.dp),
+                onClick = { onNavigateToNewPage() }
+            ) {
+                Text("Ke Halaman Baru")
             }
         }
     }
