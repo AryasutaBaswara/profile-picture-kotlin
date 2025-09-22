@@ -26,13 +26,13 @@ fun NewPage(navController: NavHostController) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = { navController.navigate("profile") }) {
-            Text("Redirect to Page 1")
+            Text("Page 1")
         }
 
         Spacer(modifier = Modifier.height(8.dp))
 
         Button(onClick = { navController.navigate("page3") }) {
-            Text("Redirect to Page 3")
+            Text("Page 3")
         }
     }
 }
