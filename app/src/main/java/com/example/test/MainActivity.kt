@@ -42,6 +42,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.test.screens.NewPage
+import com.example.test.screens.Page3
+import androidx.navigation.NavHostController
 
 
 class MainActivity : ComponentActivity() {
@@ -59,15 +61,14 @@ class MainActivity : ComponentActivity() {
                     composable("profile") {
                         ProfileCard(
                             name = "Aryasuta Baswara",
+                            navController = navController,
                             modifier = Modifier.fillMaxSize().padding(top = 80.dp),
-                            onNavigateToNewPage = {
-                                navController.navigate("newPage")
-                            }
                         )
                     }
                     composable("newPage") {
                         NewPage(navController)
                     }
+                    composable("page3") { Page3(navController) }
                 }
             }
         }
@@ -75,7 +76,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ProfileCard(name: String, modifier: Modifier = Modifier, onNavigateToNewPage: () -> Unit) {
+fun ProfileCard(name: String, modifier: Modifier = Modifier, navController: NavHostController) {
     Card (
         modifier = modifier.padding(24.dp).fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
@@ -179,9 +180,16 @@ fun ProfileCard(name: String, modifier: Modifier = Modifier, onNavigateToNewPage
 
             Button(
                 modifier = Modifier.padding(top = 24.dp),
-                onClick = { onNavigateToNewPage() }
+                onClick = { navController.navigate("newPage") }
             ) {
-                Text("Ke Halaman Baru")
+                Text("Page 2")
+            }
+
+            Button(
+                modifier = Modifier.padding(top = 12.dp),
+                onClick = { navController.navigate("page3") }
+            ) {
+                Text("Page 3")
             }
         }
     }
