@@ -44,6 +44,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.test.screens.NewPage
 import com.example.test.screens.Page3
 import androidx.navigation.NavHostController
+import screens.LoginPage
 
 
 class MainActivity : ComponentActivity() {
@@ -69,6 +70,7 @@ class MainActivity : ComponentActivity() {
                         NewPage(navController)
                     }
                     composable("page3") { Page3(navController) }
+                    composable("loginPage") { LoginPage(navController) }
                 }
             }
         }
@@ -190,6 +192,13 @@ fun ProfileCard(name: String, modifier: Modifier = Modifier, navController: NavH
                 onClick = { navController.navigate("page3") }
             ) {
                 Text("Page 3")
+            }
+
+            Button(
+                modifier = Modifier.padding(top = 12.dp),
+                onClick = { navController.navigate("loginPage") }
+            ) {
+                Text("Login")
             }
         }
     }

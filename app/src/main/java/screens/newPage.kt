@@ -21,18 +21,7 @@ fun NewPage(navController: NavHostController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Welcome to Page 2...", style = MaterialTheme.typography.headlineMedium)
+        Text("Welcome to Dashboard", style = MaterialTheme.typography.headlineMedium)
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(onClick = { navController.navigate("profile") }) {
-            Text("Page 1")
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Button(onClick = { navController.navigate("page3") }) {
-            Text("Page 3")
-        }
     }
 }
